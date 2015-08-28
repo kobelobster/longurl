@@ -6,10 +6,14 @@ use tzfrs\LongURL\Client;
 use tzfrs\LongURL\Exceptions\ExpandException;
 
 /**
+ * Class Expand
+ *
  * This class is used to make requests to the expand endpoint of the longURL API
  *
- * Class Expand
  * @package tzfrs\LongURL\Services
+ * @version 0.0.1
+ * @author tzfrs
+ * @license MIT License
  */
 class Expand extends Client
 {

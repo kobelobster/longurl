@@ -5,6 +5,17 @@ namespace tzfrs\LongURL;
 use \GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\ClientException;
 
+/**
+ * Class Client
+ *
+ * This class is the base class of the library. It handles requests, and has methods that are usable by multiple service
+ * endpoints. It acts as a "wrapper" for all services.
+ *
+ * @package tzfrs\LongURL
+ * @version 0.0.1
+ * @author tzfrs
+ * @license MIT License
+ */
 class Client
 {
     protected $baseURL  = 'http://api.longurl.org';
