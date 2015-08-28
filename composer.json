@@ -1,0 +1,20 @@
+{
+  "name": "tzfrs/longurl",
+  "description": "This library extends short URLs to longURLs",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Theo Tzaferis",
+      "email": "theo@tzfrs.de"
+    }
+  ],
+  "autoload" : {
+    "psr-4" : {
+      "tzfrs\\LongURL\\" : "src/"
+    }
+  },
+  "require": {
+    "guzzlehttp/guzzle": "^6.0"
+  }
+}
