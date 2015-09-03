@@ -4,6 +4,7 @@ namespace tzfrs\LongURL;
 
 use \GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\ServerException;
 
 /**
  * Class Client
@@ -12,7 +13,7 @@ use GuzzleHttp\Exception\ClientException;
  * endpoints. It acts as a "wrapper" for all services.
  *
  * @package tzfrs\LongURL
- * @version 0.0.1
+ * @version 0.0.2
  * @author tzfrs
  * @license MIT License
  */
@@ -31,11 +32,13 @@ class Client
      * Then Guzzle is used to make a request. If an error occurs, e.g. 400 or 404, and error message is thrown.
      *
      * @param array $parameters The parameters that are sent with the request
+     * @param string $format The format in which the response should be returned. Defaults to xml
      * @return \Psr\Http\Message\StreamInterface|string
      */
-    protected function request(Array $parameters = [])
+    protected function request(Array $parameters = [], $format = 'json')
     {
-        $url    = $this->baseURL . '/' . $this->version . '/' . $this->endpoint;
+        $url                    = $this->baseURL . '/' . $this->version . '/' . $this->endpoint;
+        $parameters['format']   = $format;
         $client = new GuzzleClient;
         try {
             $result = $client->get($url, [
@@ -44,6 +47,8 @@ class Client
             return $result->getBody();
         } catch (ClientException $e) {
             return 'API-Request to: '. $e->getRequest()->getUri() . ' failed. ' . $e->getMessage();
+        } catch (ServerException $e) {
+            return 'LongURL-Server-Exception for: '. $e->getRequest()->getUri() . '. ' . $e->getMessage();
         }
     }
 
