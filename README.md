@@ -16,8 +16,8 @@ Install via [composer](https://getcomposer.org):
 
 ## Attention
 
-This library currently only supports one method, because I'm just using it for a project that only needs this service. 
-If you want extra features then just open an issue.
+This library currently only supports methods for getting services, checking if an URL is a short URL and expanding URLs, 
+because I'm just using it for a project that only needs these features. If you want extra features then just open an issue.
 
 Run `composer install` or `composer update`.
 
