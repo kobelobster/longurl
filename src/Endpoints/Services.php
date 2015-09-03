@@ -3,7 +3,7 @@ namespace tzfrs\LongURL\Endpoints;
 
 use GuzzleHttp\Psr7\Stream;
 use tzfrs\LongURL\Client;
-use tzfrs\LongURL\Exceptions\ServiceException;
+use tzfrs\LongURL\Exceptions\ServicesException;
 
 /**
  * Class Services
@@ -11,7 +11,7 @@ use tzfrs\LongURL\Exceptions\ServiceException;
  * This class is used to make requests to the Services endpoint of the longURL API
  *
  * @package tzfrs\LongURL\Services
- * @version 0.0.2
+ * @version 0.0.3
  * @author tzfrs
  * @license MIT License
  */
@@ -28,7 +28,7 @@ class Services extends Client
      *
      * @param string $format
      * @return mixed
-     * @throws ServiceException
+     * @throws ServicesException
      */
     public function getServices($format = 'json')
     {
@@ -37,7 +37,7 @@ class Services extends Client
             $content    = $stream->getContents();
             return $format === 'json' ? json_decode($content) : $this->parseXML($content);
         }
-        throw new ServiceException($stream);
+        throw new ServicesException($stream);
     }
 
     /**
@@ -47,7 +47,7 @@ class Services extends Client
      * The method then checks if the url has parts of a url shortener service in it and returns a boolean accordingly
      * @param $url
      * @return bool
-     * @throws ServiceException
+     * @throws ServicesException
      */
     public function isShortURL($url)
     {

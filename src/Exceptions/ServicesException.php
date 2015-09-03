@@ -5,16 +5,16 @@ namespace tzfrs\LongURL\Exceptions;
 use Exception;
 
 /**
- * Class ServiceException
+ * Class ServicesException
  *
  * Exception class used, when there is an error while using the Service endpoint of the LongURL API
  *
  * @package tzfrs\LongURL\Exceptions
- * @version 0.0.1
+ * @version 0.0.3
  * @author tzfrs
  * @license MIT License
  */
-class ServiceException extends Exception
+class ServicesException extends Exception
 {
 
 }
