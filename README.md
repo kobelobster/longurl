@@ -14,12 +14,12 @@ Install via [composer](https://getcomposer.org):
 }
 ```
 
+Run `composer install` or `composer update`.
+
 ## Attention
 
 This library currently only supports methods for getting services, checking if an URL is a short URL and expanding URLs, 
 because I'm just using it for a project that only needs these features. If you want extra features then just open an issue.
-
-Run `composer install` or `composer update`.
 
 ## Getting Started
 
