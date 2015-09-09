@@ -8,7 +8,7 @@ use tzfrs\LongURL\Endpoints\Expand;
  * This class is used to make tests for the class that makes requests to the expand endpoint of the longURL API
  *
  * @package tzfrs\LongURL\Tests
- * @version 0.0.1
+ * @version 0.0.4
  * @author tzfrs
  * @license MIT License
  */

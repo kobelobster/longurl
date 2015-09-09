@@ -14,7 +14,7 @@ use GuzzleHttp\Exception\ServerException;
  * endpoints. It acts as a "wrapper" for all services.
  *
  * @package tzfrs\LongURL
- * @version 0.0.2
+ * @version 0.0.4
  * @author tzfrs
  * @license MIT License
  */
