@@ -11,7 +11,7 @@ use tzfrs\LongURL\Exceptions\ExpandException;
  * This class is used to make requests to the expand endpoint of the longURL API
  *
  * @package tzfrs\LongURL\Services
- * @version 0.0.2
+ * @version 0.0.4
  * @author tzfrs
  * @license MIT License
  */

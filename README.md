@@ -9,7 +9,7 @@ Install via [composer](https://getcomposer.org):
 ```javascript
 {
     "require": {
-        "tzfrs/longurl": "0.0.3"
+        "tzfrs/longurl": "0.0.4"
     }
 }
 ```
