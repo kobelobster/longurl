@@ -2,6 +2,7 @@
 
 namespace tzfrs\LongURL;
 
+use Gilbitron\Util\SimpleCache;
 use \GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ServerException;
@@ -13,15 +14,55 @@ use GuzzleHttp\Exception\ServerException;
  * endpoints. It acts as a "wrapper" for all services.
  *
  * @package tzfrs\LongURL
- * @version 0.0.2
+ * @version 0.0.4
  * @author tzfrs
  * @license MIT License
  */
 class Client
 {
+    /**
+     * The Base URL of the API
+     * @var string
+     */
     protected $baseURL  = 'http://api.longurl.org';
+
+    /**
+     * The current API Version
+     * @var string
+     */
     protected $version  = 'v2';
+
+    /**
+     * The endpoint that will be used for the API requests
+     * @var null
+     */
     protected $endpoint = null;
+
+    /**
+     * @var bool
+     */
+    protected $useCache = true;
+
+    /**
+     * @var null|SimpleCache
+     */
+    protected $cache    = null;
+
+    /**
+     * The constructor for the class defines if caching should be used
+     *
+     * @param bool|false $useCache Whether to use caching
+     * @param string $cachePath The path of the cache
+     */
+    public function __construct($useCache = true, $cachePath = '/tmp/')
+    {
+        $this->useCache = $useCache;
+
+        if ($this->useCache === true) {
+            $this->cache = new SimpleCache();
+            $this->cache->cache_path = $cachePath;
+        }
+    }
 
     /**
      * This method executes requests to the LongURL API.

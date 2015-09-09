@@ -9,7 +9,7 @@ Install via [composer](https://getcomposer.org):
 ```javascript
 {
     "require": {
-        "tzfrs/longurl": "0.0.3"
+        "tzfrs/longurl": "0.0.4"
     }
 }
 ```
@@ -20,6 +20,9 @@ Run `composer install` or `composer update`.
 
 This library currently only supports methods for getting services, checking if an URL is a short URL and expanding URLs, 
 because I'm just using it for a project that only needs these features. If you want extra features then just open an issue.
+
+For caching, by default this library uses the /tmp/ directory. If you want to change it, just use the 2nd parameter of the constructor
+to define the cache path
 
 ## Getting Started
 

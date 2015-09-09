@@ -11,7 +11,7 @@ use tzfrs\LongURL\Exceptions\ExpandException;
  * This class is used to make requests to the expand endpoint of the longURL API
  *
  * @package tzfrs\LongURL\Services
- * @version 0.0.2
+ * @version 0.0.4
  * @author tzfrs
  * @license MIT License
  */
@@ -39,6 +39,15 @@ class Expand extends Client
      */
     public function expandURL($url, $format = 'json')
     {
+        $cacheName = md5(__FUNCTION__ . $url . $format);
+
+        if ($this->useCache) {
+            $content = $this->cache->get_cache($cacheName);
+            if ($content !== false) {
+                $content = json_decode($content);
+                return $content->{'long-url'};
+            }
+        }
         // Check if a short url has been passed
         if ((new Services)->isShortURL($url) === false) {
             return $url;
@@ -49,6 +58,11 @@ class Expand extends Client
         if ($stream instanceof Stream) {
             $content = $stream->getContents();
             $content = $format === 'json' ? json_decode($content) : $this->parseXML($content);
+
+            if ($this->useCache === true) {
+                $this->cache->set_cache($cacheName, json_encode($content));
+            }
+
             return $content->{'long-url'};
         }
         throw new ExpandException($stream);

@@ -11,7 +11,7 @@ use tzfrs\LongURL\Exceptions\ServicesException;
  * This class is used to make requests to the Services endpoint of the longURL API
  *
  * @package tzfrs\LongURL\Services
- * @version 0.0.3
+ * @version 0.0.4
  * @author tzfrs
  * @license MIT License
  */
@@ -30,11 +30,23 @@ class Services extends Client
      * @return mixed
      * @throws ServicesException
      */
-    public function getServices($format = 'json')
+    public function getServices($format = 'xml')
     {
-        $stream     = $this->request();
+        $cacheName = md5(__FUNCTION__ . $format);
+
+        if ($this->useCache) {
+            $content = $this->cache->get_cache($cacheName);
+            if ($content !== false) {
+                return $format === 'json' ? json_decode($content) : $this->parseXML($content);
+            }
+        }
+
+        $stream     = $this->request([], $format);
         if ($stream instanceof Stream) {
             $content    = $stream->getContents();
+            if ($this->useCache === true) {
+                $this->cache->set_cache($cacheName, $content);
+            }
             return $format === 'json' ? json_decode($content) : $this->parseXML($content);
         }
         throw new ServicesException($stream);
@@ -51,12 +63,24 @@ class Services extends Client
      */
     public function isShortURL($url)
     {
-        $services = $this->getServices();
-        foreach ($services as $service=>$info) {
-            if (stripos($url, $service) !== false) {
-                return true;
+        $cacheName  = md5(__FUNCTION__ . $url);
+
+        if ($this->useCache === true) {
+            $data = $this->cache->get_cache($cacheName);
+            if ($data !== false) {
+                return $data === '1';
             }
         }
-        return false;
+
+        $services   = $this->getServices();
+        $isShortURL = false;
+        foreach ($services as $service=>$info) {
+            if (stripos($url, $service) !== false) {
+                $isShortURL = true;
+                break;
+            }
+        }
+        $this->cache->set_cache($cacheName, $isShortURL);
+        return $isShortURL;
     }
 }
