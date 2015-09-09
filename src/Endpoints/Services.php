@@ -11,7 +11,7 @@ use tzfrs\LongURL\Exceptions\ServicesException;
  * This class is used to make requests to the Services endpoint of the longURL API
  *
  * @package tzfrs\LongURL\Services
- * @version 0.0.4
+ * @version 0.0.5
  * @author tzfrs
  * @license MIT License
  */
