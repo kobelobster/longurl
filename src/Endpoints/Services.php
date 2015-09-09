@@ -30,7 +30,7 @@ class Services extends Client
      * @return mixed
      * @throws ServicesException
      */
-    public function getServices($format = 'xml')
+    public function getServices($format = 'json')
     {
         $cacheName = md5(__FUNCTION__ . $format);
 
